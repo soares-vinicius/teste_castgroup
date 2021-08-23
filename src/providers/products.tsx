@@ -1,30 +1,40 @@
-import React, { useContext, createContext, useState, useEffect } from "react";
-import { useCallback } from "react";
+import React, {
+  useContext,
+  createContext,
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
 import { ProductModel } from "../models/products";
 import { useCastApi } from "../services/api";
 
 interface ContextModel {
-  loadProucts(): Promise<void>;
-  data: ProductModel[];
+  products: ProductModel[];
+  setProducts: Function;
 }
 
 const ProductsContext = createContext<ContextModel>({} as ContextModel);
 
 const ProductsProvider: React.FC = ({ children }) => {
   const castApi = useCastApi();
-  const [data, setData] = useState(new Array<ProductModel>());
+  const [products, setProducts] = useState(new Array<ProductModel>());
 
-  const loadProucts = useCallback(async (): Promise<void> => {
+  const loadData = useCallback(async (): Promise<void> => {
     const response = await castApi.get(`products/`);
-    await setData(response.data);
+    setProducts(
+      response.data.map((item: ProductModel) => {
+        return { ...item, rate: Math.floor(Math.random() * 5) + 2 };
+      })
+    );
   }, [castApi]);
 
   useEffect(() => {
-    loadProucts();
+    loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <ProductsContext.Provider value={{ data, loadProucts }}>
+    <ProductsContext.Provider value={{ products, setProducts }}>
       {children}
     </ProductsContext.Provider>
   );
@@ -32,8 +42,7 @@ const ProductsProvider: React.FC = ({ children }) => {
 
 function useProducts(): ContextModel {
   const context = useContext(ProductsContext);
-  const { data, loadProucts } = context;
-  return { data, loadProucts };
+  const { products, setProducts } = context;
+  return { products, setProducts };
 }
-
 export { ProductsProvider, useProducts };

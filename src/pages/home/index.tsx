@@ -1,20 +1,32 @@
 import React from "react";
-import { SimpleGrid } from "@chakra-ui/react";
+import { Box, Stack, Heading, SimpleGrid } from "@chakra-ui/react";
 
 import Card from "../../components/card";
 import { useProducts } from "../../providers/products";
 
 const ListProducts: React.FC = () => {
-  const { data } = useProducts();
+  const { products } = useProducts();
 
   return (
-    <main>
-      <SimpleGrid columns={4} spacing={10}>
-        {data.map((item) => (
-          <Card key={item.id} product={item} />
-        ))}
-      </SimpleGrid>
-    </main>
+    <Box as="main">
+      <Stack spacing="md">
+        <Heading
+          as="h1"
+          textTransform="uppercase"
+          borderBottom="5px solid"
+          borderColor="blue.600"
+          p="0 10px"
+          w="fit-content"
+        >
+          Celulares
+        </Heading>
+        <SimpleGrid columns={4} spacing={10}>
+          {products.map((item) => (
+            <Card key={item.id} product={item} />
+          ))}
+        </SimpleGrid>
+      </Stack>
+    </Box>
   );
 };
 

@@ -17,6 +17,7 @@ import {
 import { RiShoppingCartLine } from "react-icons/ri";
 
 import { ProductModel } from "../../models/products";
+import { useCart } from "../../providers/cart";
 import { currencyFormatter } from "../../utils/formatter";
 
 interface ProductModalProps {
@@ -28,6 +29,7 @@ export default function ProductModal({
   product,
   modalProps,
 }: ProductModalProps) {
+  const { handleAddCart } = useCart();
   const { isOpen, onClose } = modalProps;
 
   const {
@@ -39,6 +41,7 @@ export default function ProductModal({
     price,
     picture,
     quantity,
+    id,
   } = product;
   return (
     <>
@@ -104,6 +107,7 @@ export default function ProductModal({
                   color="white"
                   colorScheme="red"
                   disabled={quantity === 0}
+                  onClick={() => handleAddCart(id)}
                 >
                   <Icon as={RiShoppingCartLine} mr="10px" /> Comprar
                 </Button>

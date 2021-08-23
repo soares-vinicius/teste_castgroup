@@ -8,4 +8,5 @@ export interface ProductModel {
   brand: string;
   chipType: string;
   quantity: number;
+  rate: number;
 }

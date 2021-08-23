@@ -10,7 +10,7 @@ export default createGlobalStyle`
   }
 
   main {
-    margin: 140px auto 30px;
+    margin: 115px auto 30px;
     width: 90%;
     max-width: 1980px;
   }

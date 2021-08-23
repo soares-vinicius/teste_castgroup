@@ -14,6 +14,7 @@ import { RiStarFill, RiShoppingCartLine } from "react-icons/ri";
 import { ProductModel } from "../../models/products";
 import { currencyFormatter } from "../../utils/formatter";
 import ProductModal from "../modal";
+import { useCart } from "../../providers/cart";
 
 interface CardProps {
   product: ProductModel;
@@ -21,9 +22,9 @@ interface CardProps {
 
 export default function Card({ product }: CardProps): React.ReactElement {
   const PropsModal = useDisclosure();
+  const { handleAddCart } = useCart();
   const { onOpen } = PropsModal;
-
-  const { picture, title, price, quantity } = product;
+  const { picture, title, price, quantity, rate, id } = product;
 
   return (
     <>
@@ -62,7 +63,7 @@ export default function Card({ product }: CardProps): React.ReactElement {
                 <Icon
                   key={i}
                   as={RiStarFill}
-                  color={i < 3 ? "green.500" : "gray.300"}
+                  color={i < rate ? "green.500" : "gray.300"}
                 />
               ))}
           </Box>
@@ -100,6 +101,7 @@ export default function Card({ product }: CardProps): React.ReactElement {
             colorScheme="red"
             borderRadius="0"
             disabled={quantity === 0}
+            onClick={() => handleAddCart(id)}
           >
             <Icon as={RiShoppingCartLine} mr="10px" /> Comprar
           </Button>

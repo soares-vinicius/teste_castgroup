@@ -11,13 +11,20 @@ import {
   Icon,
   Avatar,
   Link,
+  Button,
 } from "@chakra-ui/react";
 
 import { RiShoppingCartLine } from "react-icons/ri";
 
 import logo from "../../assets/images/cast-logo2.png";
+import { useCart } from "../../providers/cart";
 
 export default function Menu(): React.ReactElement {
+  const {
+    disclosure: { onOpen },
+    cart,
+  } = useCart();
+
   return (
     <Box as="header" position="fixed" w="100%" top="0" zIndex="999">
       <Box bg="gray.300">
@@ -52,71 +59,33 @@ export default function Menu(): React.ReactElement {
               />
               Vinicius Soares
             </Text>
-            <Icon as={RiShoppingCartLine} />
+            <Button
+              position="relative"
+              type="button"
+              onClick={onOpen}
+              colorScheme="none"
+              color="gray.400"
+            >
+              <Icon as={RiShoppingCartLine} boxSize="25px" />
+              {cart.length > 0 && (
+                <Text
+                  as="sup"
+                  position="absolute"
+                  right="5px"
+                  d="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  backgroundColor="red.500"
+                  color="white"
+                  h="20px"
+                  w="20px"
+                  borderRadius="50%"
+                >
+                  {cart.length}
+                </Text>
+              )}
+            </Button>
           </HStack>
-        </HStack>
-
-        <HStack w="80%" m="0 auto" justify="space-around">
-          <Link
-            as={NavLink}
-            to="/novidades"
-            textAlign="center"
-            p="5px 15px"
-            w="150px"
-            _hover={{ textDecor: "none" }}
-            _focus={{ borderWidth: "none" }}
-            isTruncated
-          >
-            Novidades
-          </Link>
-          <Link
-            as={NavLink}
-            to="/samsung"
-            textAlign="center"
-            p="5px 15px"
-            w="150px"
-            _hover={{ textDecor: "none" }}
-            _focus={{ borderWidth: "none" }}
-            isTruncated
-          >
-            Samsung
-          </Link>
-          <Link
-            as={NavLink}
-            to="/motorola"
-            textAlign="center"
-            p="5px 15px"
-            w="150px"
-            _hover={{ textDecor: "none" }}
-            _focus={{ borderWidth: "none" }}
-            isTruncated
-          >
-            Motorola
-          </Link>
-          <Link
-            as={NavLink}
-            to="/lenovo"
-            textAlign="center"
-            p="5px 15px"
-            w="150px"
-            _hover={{ textDecor: "none" }}
-            _focus={{ borderWidth: "none" }}
-            isTruncated
-          >
-            Lenovo
-          </Link>
-          <Link
-            as={NavLink}
-            to="/lg"
-            textAlign="center"
-            p="5px 15px"
-            w="150px"
-            _hover={{ textDecor: "none" }}
-            _focus={{ borderWidth: "none" }}
-            isTruncated
-          >
-            LG
-          </Link>
         </HStack>
       </Box>
     </Box>

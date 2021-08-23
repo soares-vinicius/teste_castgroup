@@ -1,46 +1,76 @@
-# Getting Started with Create React App
+# Teste de Desenvolvedor Frontend-Jr para Cast group:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Projeto criado com [React.js](https://pt-br.reactjs.org/), ultilizando [TypeScript](https://www.typescriptlang.org/), [Hooks](https://pt-br.reactjs.org/docs/hooks-intro.html), [Context API](https://pt-br.reactjs.org/docs/context.html), [Styled Components](https://styled-components.com/), [Chakra-UI](https://chakra-ui.com/), [React-icons](https://react-icons.github.io/react-icons/), [React-Router-DOM](https://reactrouter.com/web/guides/quick-start), [Axios](https://axios-http.com/).
 
-## Available Scripts
+## Iniciando o Projeto
 
-In the project directory, you can run:
+Baixe o repositório ultilizando o comando :
+```
+ git clone 'https://github.com/soares-vinicius/teste_castgroup.git'
+```
+ 
+### `Iniciando o Front`
 
-### `yarn start`
+Na pasta onde se encontra o repositório rode os comandos abaixo:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Yarn install
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Instale todas as dependências do projeto com :
+```
+yarn install
+```
 
-### `yarn test`
+- Yarn start
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Inicialize o projeto com :
+```
+yarn start
+```
 
-### `yarn build`
+### `Iniciando o Back`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Para rodar o serviço, é necessário instalar o json-server:
+```
+npm install -g json-server
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Após isso, rodar o comando abaixo na pasta, __fake-backend:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+json-server --watch products.json --port 3004
+```
 
-### `yarn eject`
+Isso irá disponibilizar uma api REST rodando no endereço:
+http://localhost:3004/products.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Objetivos do teste:
+Seu objetivo é montar uma página de listagem de produtos, utilizando dos 
+componentes do Material-UI (cards, botões etc.).
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+O layout deve ser como de um site de vendas convencional, com uma listagem de 
+produtos, no card do produto um ícone de incluir no carrinho, e um ícone de 
+carrinho de compras no topo do site.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+O ícone do carrinho de compras deve exibir uma badge com a quantidade de itens 
+presente no carrinho.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+A tela de listagem de produtos deve:
+- Listar produtos
+  - Ao entrar no projeto, deve exibir os produtos na listagem com foto, 
+título e preço formatado em reais;
+  - Ao clicar no produto da lista, deve exibir os detalhes de um produto 
+individual (utilizar por exemplo um modal, ou abrir uma nova página de 
+detalhes);
+- Permitir comprar
+  - Ao clicar em comprar, e o produto não estiver no carrinho, deve ser 
+adicionado;
+  - Ao clicar em comprar, e o produto já existir no carrinho, deve ser 
+incrementado em 1;
+  - Exibir resumo do carrinho
+  - Exibir no ícone do carrinho uma badge com quantidade de itens;
+  - Exibir ao lado do ícone, o valor total da compra;
+- O carrinho deve:
+  - Permitir remover itens;
+  - Ao remover, liberar o estoque do produto;
+  - Exibir o somatório total dos itens incluídos;
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
